@@ -1,0 +1,24 @@
+/* Global App Styles - LudooVictory Gaming Platform */
+
+/* Ensure body fills the screen */
+html, body, #root {
+  min-height: 100vh;
+  background-color: hsl(42 58% 97%);
+}
+
+/* Remove any default margins */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection color */
+::selection {
+  background-color: hsl(38 82% 47% / 0.24);
+  color: hsl(229 36% 18%);
+}

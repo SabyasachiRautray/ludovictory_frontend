@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=Chivo+Mono:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 42 58% 97%;
+    --foreground: 229 36% 18%;
+    --card: 0 0% 100%;
+    --card-foreground: 229 36% 18%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 229 36% 18%;
+    --primary: 230 45% 28%;
+    --primary-foreground: 42 58% 97%;
+    --secondary: 41 54% 91%;
+    --secondary-foreground: 229 36% 18%;
+    --muted: 42 46% 93%;
+    --muted-foreground: 230 18% 42%;
+    --accent: 38 82% 47%;
+    --accent-foreground: 229 36% 18%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 20% 96%;
+    --border: 39 34% 78%;
+    --input: 39 34% 78%;
+    --ring: 38 82% 47%;
+    --radius: 0.9rem;
+    --dycek-neon-cyan: 38 82% 47%;
+    --dycek-neon-lime: 154 47% 39%;
+    --dycek-neon-amber: 38 82% 47%;
+    --dycek-neon-red: 0 84% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body;
+    background-image:
+      radial-gradient(circle at 18% 8%, rgba(197, 143, 34, 0.18), transparent 30%),
+      radial-gradient(circle at 84% 4%, rgba(39, 50, 103, 0.14), transparent 32%),
+      linear-gradient(180deg, hsl(42 58% 98%) 0%, hsl(41 48% 94%) 100%);
+    background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .font-heading {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .font-body {
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+  .font-mono-num {
+    font-family: 'Chivo Mono', monospace;
+  }
+  .neon-glow-cyan {
+    box-shadow: 0 0 0 1px hsl(var(--border)), 0 14px 34px rgba(197, 143, 34, 0.20);
+  }
+  .neon-glow-amber {
+    box-shadow: 0 0 0 1px hsl(var(--border)), 0 14px 34px rgba(197, 143, 34, 0.22);
+  }
+  .neon-text-cyan {
+    text-shadow: 0 2px 16px rgba(197, 143, 34, 0.30);
+  }
+  .neon-text-amber {
+    text-shadow: 0 2px 16px rgba(197, 143, 34, 0.32);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(42 58% 97%);
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(39 34% 78%);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(38 45% 61%);
+}
+
+/* Ticker animation */
+@keyframes ticker-scroll {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+.ticker-animate {
+  animation: ticker-scroll 30s linear infinite;
+}
+.ticker-animate:hover {
+  animation-play-state: paused;
+}
+
+/* Spin animation */
+@keyframes spin-wheel {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(var(--spin-target, 3600deg)); }
+}
+
+
+@keyframes leaderboard-scroll {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+.animate-leaderboard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  animation: leaderboard-scroll 18s linear infinite;
+}
+
+.animate-leaderboard:hover {
+  animation-play-state: paused;
+}
+
+/* Horizontal marquee auto-scroll */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  gap: 1rem;
+  animation: marquee-scroll 30s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.animate-marquee-fast {
+  display: flex;
+  gap: 1rem;
+  animation: marquee-scroll 20s linear infinite;
+}
+
+.animate-marquee-fast:hover {
+  animation-play-state: paused;
+}
