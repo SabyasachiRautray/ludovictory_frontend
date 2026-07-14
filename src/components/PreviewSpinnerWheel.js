@@ -165,19 +165,13 @@ const PreviewSpinnerWheel = ({ size = "220px", hover = true }) => {
             const palette = SEGMENT_PALETTE[i % SEGMENT_PALETTE.length];
             const textColor = getTextColor(palette.bg);
 
-            // Horizontal text: positioned at segment center, no rotation
-            const textR = R * 0.64;
-            const textX = 200 + textR * Math.cos(midRad);
-            const textY = 200 + textR * Math.sin(midRad);
+            // Text starts near the hub and runs OUTWARD toward the rim
+            const textStartR = 46;
+            const textX = 200 + textStartR * Math.cos(midRad);
+            const textY = 200 + textStartR * Math.sin(midRad);
 
-            // Scale font based on segment count and label length (made much larger for visibility)
-            const baseFontSize = segCount > 10 ? 11 : segCount > 6 ? 13 : 15;
-            const fontSize =
-              seg.label.length > 12
-                ? baseFontSize * 0.7
-                : seg.label.length > 8
-                  ? baseFontSize * 0.85
-                  : baseFontSize;
+            // Fixed font size per segment-count tier
+            const fontSize = segCount > 10 ? 17 : segCount > 6 ? 22 : 26;
 
             return (
               <g key={seg.id || i}>
@@ -191,19 +185,22 @@ const PreviewSpinnerWheel = ({ size = "220px", hover = true }) => {
                   x1="200" y1="200" x2={x1} y2={y1}
                   stroke="rgba(255,255,255,0.35)" strokeWidth="1.5"
                 />
-                {/* Horizontal text — always reads left-to-right */}
+                {/* Radial label — reads outward from hub to rim */}
                 <text
                   x={textX}
                   y={textY}
-                  fill={textColor}
+                  fill="#ffffff"
+                  stroke="#ffffff"
+                  strokeWidth="0.4"
                   fontSize={fontSize}
                   fontWeight="900"
-                  textAnchor="middle"
+                  textAnchor="start"
                   dominantBaseline="middle"
                   fontFamily="'Space Grotesk', system-ui, -apple-system, sans-serif"
+                  transform={`rotate(${midAngle - 90}, ${textX}, ${textY})`}
                   style={{
-                    textShadow: "0 1.5px 3px rgba(0,0,0,0.3)",
-                    letterSpacing: "-0.02em"
+                    textShadow: "0 2px 6px rgba(0,0,0,0.6), 0 0 3px rgba(0,0,0,0.95)",
+                    letterSpacing: "0.01em",
                   }}
                 >
                   {seg.label}
