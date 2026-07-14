@@ -27,6 +27,30 @@ const UPI_ID = import.meta.env.VITE_UPI_ID || "yourname@upi";
 const UPI_NAME = import.meta.env.VITE_UPI_NAME || "Dycek";
 const QR_IMAGE = "/qr.png";
 
+const getFontSizeClass = (value, baseSize = "text-2xl") => {
+  const len = String(value).length;
+  if (baseSize === "text-3xl") {
+    if (len > 12) return "text-base";
+    if (len > 9) return "text-lg";
+    if (len > 7) return "text-xl";
+    if (len > 5) return "text-2xl";
+    return "text-2xl sm:text-3xl";
+  }
+  if (baseSize === "text-2xl") {
+    if (len > 12) return "text-xs";
+    if (len > 9) return "text-sm";
+    if (len > 7) return "text-base";
+    if (len > 5) return "text-lg";
+    return "text-xl sm:text-2xl";
+  }
+  if (baseSize === "text-base") {
+    if (len > 12) return "text-xs";
+    if (len > 9) return "text-xs sm:text-sm";
+    return "text-sm sm:text-base";
+  }
+  return baseSize;
+};
+
 const STATUS_CONFIG = {
   pending: {
     label: "Pending Verification",
@@ -434,57 +458,57 @@ const BuyTokens = () => {
                           className="bg-[hsl(var(--accent))]/5 border border-[hsl(var(--accent))]/20 rounded-xl p-4"
                         >
                           {calcMode === "rupees" ? (
-                            <div className="flex items-center justify-between">
-                              <div>
+                            <div className="flex items-center justify-between gap-3">
+                              <div className="min-w-0">
                                 <p className="text-xs text-muted-foreground">
                                   You pay
                                 </p>
-                                <p className="font-mono-num text-2xl font-bold">
+                                <p className={`font-mono-num font-bold ${getFontSizeClass(`₹${calcResult.price.toFixed(2)}`, "text-2xl")}`}>
                                   ₹{calcResult.price.toFixed(2)}
                                 </p>
                               </div>
-                              <div className="text-2xl text-muted-foreground">
+                              <div className="text-xl sm:text-2xl text-muted-foreground shrink-0">
                                 →
                               </div>
-                              <div className="text-right">
+                              <div className="text-right min-w-0">
                                 <p className="text-xs text-muted-foreground">
                                   You get
                                 </p>
                                 <div className="flex items-center gap-1.5 justify-end">
-                                  <ShoppingBag className="w-5 h-5 text-[hsl(var(--accent))]" />
-                                  <p className="font-mono-num text-2xl font-bold text-[hsl(var(--accent))]">
+                                  <ShoppingBag className="w-5 h-5 text-[hsl(var(--accent))] shrink-0" />
+                                  <p className={`font-mono-num font-bold text-[hsl(var(--accent))] ${getFontSizeClass(calcResult.tokens.toLocaleString(), "text-2xl")}`}>
                                     {calcResult.tokens.toLocaleString()}
                                   </p>
                                 </div>
-                                <p className="text-[10px] text-muted-foreground">
+                                <p className="text-[10px] text-muted-foreground truncate">
                                   shopping tokens
                                 </p>
                               </div>
                             </div>
                           ) : (
-                            <div className="flex items-center justify-between">
-                              <div>
+                            <div className="flex items-center justify-between gap-3">
+                              <div className="min-w-0">
                                 <p className="text-xs text-muted-foreground">
                                   You want
                                 </p>
                                 <div className="flex items-center gap-1.5">
-                                  <ShoppingBag className="w-5 h-5 text-[hsl(var(--accent))]" />
-                                  <p className="font-mono-num text-2xl font-bold text-[hsl(var(--accent))]">
+                                  <ShoppingBag className="w-5 h-5 text-[hsl(var(--accent))] shrink-0" />
+                                  <p className={`font-mono-num font-bold text-[hsl(var(--accent))] ${getFontSizeClass(calcResult.tokens.toLocaleString(), "text-2xl")}`}>
                                     {calcResult.tokens.toLocaleString()}
                                   </p>
                                 </div>
-                                <p className="text-[10px] text-muted-foreground">
+                                <p className="text-[10px] text-muted-foreground truncate">
                                   shopping tokens
                                 </p>
                               </div>
-                              <div className="text-2xl text-muted-foreground">
+                              <div className="text-xl sm:text-2xl text-muted-foreground shrink-0">
                                 →
                               </div>
-                              <div className="text-right">
+                              <div className="text-right min-w-0">
                                 <p className="text-xs text-muted-foreground">
                                   You pay
                                 </p>
-                                <p className="font-mono-num text-2xl font-bold">
+                                <p className={`font-mono-num font-bold ${getFontSizeClass(`₹${calcResult.price.toFixed(2)}`, "text-2xl")}`}>
                                   ₹{calcResult.price.toFixed(2)}
                                 </p>
                               </div>
@@ -582,25 +606,25 @@ const BuyTokens = () => {
                           <p className="font-heading font-bold text-base mb-3">
                             {pkg.label}
                           </p>
-                          <div className="flex items-center gap-2 mb-4">
-                            <ShoppingBag className="w-5 h-5 text-[hsl(var(--accent))]" />
-                            <span className="font-mono-num text-3xl font-bold text-[hsl(var(--accent))]">
+                          <div className="flex items-center gap-2 mb-4 min-w-0">
+                            <ShoppingBag className="w-5 h-5 text-[hsl(var(--accent))] shrink-0" />
+                            <span className={`font-mono-num font-bold text-[hsl(var(--accent))] ${getFontSizeClass(pkg.tokens.toLocaleString(), "text-3xl")}`}>
                               {pkg.tokens.toLocaleString()}
                             </span>
-                            <span className="text-sm text-muted-foreground">
+                            <span className="text-sm text-muted-foreground shrink-0">
                               tokens
                             </span>
                           </div>
-                          <div className="flex items-center justify-between">
-                            <div>
+                          <div className="flex items-center justify-between gap-2">
+                            <div className="min-w-0">
                               <p className="text-xs text-muted-foreground">
                                 Pay
                               </p>
-                              <p className="font-mono-num text-2xl font-bold">
+                              <p className={`font-mono-num font-bold ${getFontSizeClass(`₹${Number(pkg.price).toFixed(0)}`, "text-2xl")}`}>
                                 ₹{Number(pkg.price).toFixed(0)}
                               </p>
                             </div>
-                            <div className="px-4 py-2 bg-[hsl(var(--primary))] text-white rounded-xl text-sm font-bold">
+                            <div className="px-4 py-2 bg-[hsl(var(--primary))] text-white rounded-xl text-sm font-bold shrink-0">
                               Buy Now
                             </div>
                           </div>
@@ -631,21 +655,21 @@ const BuyTokens = () => {
                 </button>
 
                 {/* Summary */}
-                <div className="bg-[hsl(var(--primary))]/5 border border-[hsl(var(--primary))]/20 rounded-2xl p-4 flex items-center justify-between">
-                  <div>
-                    <p className="font-heading font-bold">{purchase.label}</p>
+                <div className="bg-[hsl(var(--primary))]/5 border border-[hsl(var(--primary))]/20 rounded-2xl p-4 flex items-center justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="font-heading font-bold truncate">{purchase.label}</p>
                     <div className="flex items-center gap-1.5 mt-1">
-                      <ShoppingBag className="w-4 h-4 text-[hsl(var(--accent))]" />
-                      <span className="font-mono-num font-bold text-[hsl(var(--accent))]">
+                      <ShoppingBag className="w-4 h-4 text-[hsl(var(--accent))] shrink-0" />
+                      <span className={`font-mono-num font-bold text-[hsl(var(--accent))] ${getFontSizeClass(purchase.tokens.toLocaleString(), "text-base")}`}>
                         {purchase.tokens.toLocaleString()} tokens
                       </span>
                     </div>
                   </div>
-                  <div className="text-right">
+                  <div className="text-right min-w-0 shrink-0">
                     <p className="text-xs text-muted-foreground">
                       Amount to pay
                     </p>
-                    <p className="font-mono-num text-3xl font-bold">
+                    <p className={`font-mono-num font-bold ${getFontSizeClass(`₹${purchase.price.toFixed(2)}`, "text-3xl")}`}>
                       ₹{purchase.price.toFixed(2)}
                     </p>
                   </div>
