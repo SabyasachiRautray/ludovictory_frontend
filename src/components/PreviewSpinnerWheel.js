@@ -166,12 +166,17 @@ const PreviewSpinnerWheel = ({ size = "220px", hover = true }) => {
             const textColor = getTextColor(palette.bg);
 
             // Text starts near the hub and runs OUTWARD toward the rim
-            const textStartR = 46;
+            const textStartR = 64;
             const textX = 200 + textStartR * Math.cos(midRad);
             const textY = 200 + textStartR * Math.sin(midRad);
 
-            // Fixed font size per segment-count tier
-            const fontSize = segCount > 10 ? 17 : segCount > 6 ? 22 : 26;
+            // Base font size per segment-count tier — scaled dynamically for long labels
+            let fontSize = segCount > 10 ? 17 : segCount > 6 ? 22 : 26;
+            if (seg.label.length > 12) {
+              fontSize = Math.round(fontSize * 0.72);
+            } else if (seg.label.length > 8) {
+              fontSize = Math.round(fontSize * 0.85);
+            }
 
             return (
               <g key={seg.id || i}>

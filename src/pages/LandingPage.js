@@ -219,25 +219,27 @@ const LandingSpinner = () => (
   <Link
     to="/register"
     data-testid="landing-spinner-cta"
-    className="group block h-full bg-white/90 rounded-2xl border border-border/80 p-5 sm:p-6 shadow-[0_18px_45px_rgba(31,38,84,0.10)] hover:border-[rgba(197,143,34,0.46)] hover:shadow-[0_0_0_1px_rgba(197,143,34,0.24),0_24px_54px_rgba(31,38,84,0.15)] transition-all overflow-hidden"
+    className="group block h-full bg-white/90 rounded-2xl border border-border/80 p-4 sm:p-5 shadow-[0_18px_45px_rgba(31,38,84,0.10)] hover:border-[rgba(197,143,34,0.46)] hover:shadow-[0_0_0_1px_rgba(197,143,34,0.24),0_24px_54px_rgba(31,38,84,0.15)] transition-all overflow-hidden"
   >
-    <div className="flex flex-col items-center gap-5">
+    <div className="flex flex-col items-center justify-between h-full gap-5">
       {/* Real Spinner Wheel */}
       <div className="shrink-0">
         <PreviewSpinnerWheel size="min(100%, 240px)" hover={true} />
       </div>
 
       {/* Text content */}
-      <div className="text-center">
-        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[hsl(var(--primary))]/10 text-[hsl(var(--primary))] text-xs font-bold">
-          <Sparkles className="w-3.5 h-3.5" /> Try Your Luck
-        </span>
-        <h3 className="font-heading text-2xl font-bold mt-4">Spin the Wheel</h3>
-        <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
-          Tap the wheel to create your account and start earning referral tokens
-          from your first spin.
-        </p>
-        <span className="inline-flex items-center gap-2 mt-5 text-sm font-bold text-[hsl(var(--accent))]">
+      <div className="text-center flex-1 flex flex-col justify-between">
+        <div>
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[hsl(var(--primary))]/10 text-[hsl(var(--primary))] text-xs font-bold">
+            <Sparkles className="w-3.5 h-3.5" /> Try Your Luck
+          </span>
+          <h3 className="font-heading text-2xl font-bold mt-4">Spin the Wheel</h3>
+          <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
+            Tap the wheel to create your account and start earning referral tokens
+            from your first spin.
+          </p>
+        </div>
+        <span className="inline-flex items-center gap-2 mt-5 text-sm font-bold text-[hsl(var(--accent))] self-center">
           Register to Spin{" "}
           <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
         </span>
@@ -252,7 +254,7 @@ const LandingLeaderboard = () => {
   const leaders = data?.data || [];
 
   return (
-    <div className="bg-white/90 rounded-2xl border border-border/80 p-4 sm:p-5 shadow-[0_18px_45px_rgba(31,38,84,0.10)]">
+    <div className="h-full flex flex-col bg-white/90 rounded-2xl border border-border/80 p-4 sm:p-5 shadow-[0_18px_45px_rgba(31,38,84,0.10)]">
       <div className="flex items-center justify-center gap-3 mb-6">
         <Trophy className="w-7 h-7 text-[hsl(var(--accent))]" />
         <h3 className="font-heading text-3xl font-black bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] bg-clip-text text-transparent">
@@ -681,28 +683,30 @@ const LandingPage = () => {
             whileInView="visible"
             viewport={{ once: true, amount: 0.18 }}
             variants={stagger}
-            className="grid grid-cols-1 lg:grid-cols-3 gap-4"
+            className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch"
           >
             {/* LEFT — Leaderboard */}
-            <motion.div variants={fadeUp}>
+            <motion.div variants={fadeUp} className="flex flex-col h-full">
               <LandingLeaderboard />
             </motion.div>
             {/* CENTER — Spinner */}
-            <motion.div variants={fadeUp}>
+            <motion.div variants={fadeUp} className="flex flex-col h-full">
               <LandingSpinner />
             </motion.div>
             {/* RIGHT — New Players */}
             <motion.div
               variants={fadeUp}
-              className="bg-white/90 rounded-2xl border border-border/80 p-4 sm:p-5 shadow-[0_18px_45px_rgba(31,38,84,0.10)]"
+              className="bg-white/90 rounded-2xl border border-border/80 p-4 sm:p-5 shadow-[0_18px_45px_rgba(31,38,84,0.10)] flex flex-col h-full"
             >
-              <div className="flex items-center justify-center gap-3 mb-6 pb-3 border-b border-border/60">
-                <UserPlus className="w-8 h-8 text-[hsl(var(--primary))]" />
+              <div className="flex items-center justify-center gap-3 mb-6">
+                <UserPlus className="w-7 h-7 text-[hsl(var(--primary))]" />
                 <h3 className="font-heading text-3xl font-black bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] bg-clip-text text-transparent">
                   New Players
                 </h3>
               </div>
-              <UsersTicker />
+              <div className="flex-1 overflow-hidden">
+                <UsersTicker />
+              </div>
             </motion.div>
           </motion.div>
         </div>

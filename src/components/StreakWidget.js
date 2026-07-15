@@ -128,7 +128,7 @@ const StreakWidget = () => {
             return (
               <div
                 key={dayNum}
-                className={`shrink-0 w-12 rounded-lg py-2 flex flex-col items-center gap-0.5 border transition-colors ${
+                className={`flex-1 min-w-[44px] rounded-lg py-2 flex flex-col items-center gap-0.5 border transition-colors ${
                   isCurrent
                     ? "bg-[hsl(var(--primary))]/10 border-[hsl(var(--primary))]"
                     : isPast

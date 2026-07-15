@@ -13,7 +13,7 @@ import {
 const DashboardSpinner = () => (
   <Link
     to="/spinner"
-    className="group block h-full bg-white/90 rounded-2xl border border-border/80 p-6 sm:p-8 shadow-[0_18px_45px_rgba(31,38,84,0.10)] hover:border-[rgba(197,143,34,0.46)] hover:shadow-[0_0_0_1px_rgba(197,143,34,0.24),0_24px_54px_rgba(31,38,84,0.15)] transition-all overflow-hidden"
+    className="group block h-full bg-white/90 rounded-2xl border border-border/80 p-6 shadow-[0_18px_45px_rgba(31,38,84,0.10)] hover:border-[rgba(197,143,34,0.46)] hover:shadow-[0_0_0_1px_rgba(197,143,34,0.24),0_24px_54px_rgba(31,38,84,0.15)] transition-all overflow-hidden"
   >
     <div className="flex flex-col items-center justify-between h-full gap-6">
       {/* Header Text */}
@@ -214,7 +214,7 @@ const Dashboard = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
-            className="lg:-mt-4 lg:mb-4 relative z-10"
+            className="relative z-10 flex flex-col h-full"
           >
             <DashboardSpinner />
           </motion.div>

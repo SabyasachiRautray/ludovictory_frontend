@@ -418,17 +418,20 @@ const Spinner = () => {
                       const midRad = (midAngle - 90) * (Math.PI / 180);
 
                       // Text starts near the hub and runs OUTWARD toward the rim
-                      const textStartR = 46;
+                      const textStartR = 64;
                       const textX = 200 + textStartR * Math.cos(midRad);
                       const textY = 200 + textStartR * Math.sin(midRad);
 
                       const palette = SEGMENT_PALETTE[i % SEGMENT_PALETTE.length];
                       const textColor = getTextColor(palette.bg);
 
-                      // Fixed font size per segment-count tier — no per-label
-                      // shrinking based on text length. Long labels may overflow
-                      // their slice or wrap; that's expected/accepted here.
-                      const fontSize = segCount > 10 ? 17 : segCount > 6 ? 22 : 26;
+                      // Base font size per segment-count tier — scaled dynamically for long labels
+                      let fontSize = segCount > 10 ? 17 : segCount > 6 ? 22 : 26;
+                      if (seg.label.length > 12) {
+                        fontSize = Math.round(fontSize * 0.72);
+                      } else if (seg.label.length > 8) {
+                        fontSize = Math.round(fontSize * 0.85);
+                      }
 
                       return (
                         <g key={seg.id}>
